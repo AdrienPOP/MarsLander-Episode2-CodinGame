@@ -3,6 +3,7 @@ import java.util.*;
 class Player {
     public static void main(String args[]) {
        Game game = new Game();
+       game.start();
     }
 }
 
@@ -17,7 +18,6 @@ class Game {
 
     public Game (){
         this.initializedGame();
-        this.startGame();
     }
 
     public void initializedGame(){
@@ -35,7 +35,7 @@ class Game {
         rocket = new Rocket(landscape);
     }
 
-    public void startGame(){
+    public void start(){
 
          while (true) {
             int X = in.nextInt();
@@ -61,11 +61,9 @@ class Game {
 
 class Rocket {
 
-    Point target;
+    private Point target;
     private int xRocket;
-    int powerRocket = 4;
-    LandScape landscape;
-    int speed;
+    private LandScape landscape;
 
     public Rocket(LandScape landscape) {
         this.landscape = landscape;
@@ -103,7 +101,7 @@ class Rocket {
     public double distanceVectorForLandscape(int xRocket, int yRocket) {
         double distance;
         this.xRocket = xRocket;
-        this.target = new Point((this.landscape.startPoint.getX() + this.landscape.finishPoint.getX()) / 2, this.landscape.startPoint.getY());
+        this.target = new Point((this.landscape.getStartPoint().getX() + this.landscape.getFinishPoint().getX()) / 2, this.landscape.getStartPoint().getY());
         distance = Math.sqrt(Math.pow((double) xRocket - target.getX(), 2.0) + Math.pow((double) yRocket - target.getY(), 2.0));
         return distance;
     }
@@ -130,8 +128,8 @@ class Rocket {
 
 class LandScape{
 
-   Point startPoint;
-   Point finishPoint;
+   private Point startPoint;
+   private Point finishPoint;
 
     public LandScape(Point startPoint, Point finishPoint){
         this.startPoint = startPoint;
